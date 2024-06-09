@@ -1,4 +1,4 @@
-const token = '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';
+const token = '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';
 const repoOwner = 'Ademodsx';
 const repoName = 'Music';
 const uploadURL = `https://api.github.com/repos/${repoOwner}/${repoName}/music/`;
