@@ -1,5 +1,5 @@
 const token = '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';
-const repoOwner = 'Ademods';
+const repoOwner = 'Ademodsx';
 const repoName = 'Music';
 const uploadURL = `https://api.github.com/repos/${repoOwner}/${repoName}/music/`;
 
