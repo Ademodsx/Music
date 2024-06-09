@@ -18,7 +18,7 @@ function uploadToGitHub(file) {
   const formData = new FormData();
   formData.append('file', file);
 
-  fetch('https://api.github.com/repos/Ademodsx/Music/music', {
+  fetch('https://api.github.com/Ademodsx/Music/music', {
     method: 'PUT',
     headers: {
       Authorization: `token ${githubToken}`
