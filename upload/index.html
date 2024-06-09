@@ -1,20 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Upload to GitHub</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Music</title>
+    <style>
+        body {
+            background-image: url('background.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        #filebox {
+            background-color: rgba(255, 255, 255, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        #uploadBtn, #submitBtn {
+            background-color: green;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        #uploadBtn:hover, #submitBtn:hover {
+            background-color: darkgreen;
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <div class="background">
-      <form id="uploadForm">
-        <input type="file" id="fileInput" class="filebox">
-        <button type="submit" id="uploadButton" class="greenButton">Upload</button>
-      </form>
+    <div id="filebox">
+        <h2>Upload Music</h2>
+        <input type="file" id="fileInput">
+        <button id="uploadBtn">Upload</button>
+        <button id="submitBtn">Kirim</button>
     </div>
-  </div>
-  <script src="script.js"></script>
+
+    <script src="script.js"></script>
 </body>
 </html>
