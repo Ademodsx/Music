@@ -1,45 +1,42 @@
-const fetch = require('node-fetch');
-const fs = require('fs');
+const form = document.getElementById('uploadForm');
+const fileInput = document.getElementById('fileInput');
 
-const owner = 'Ademodsx'; // Ganti dengan nama pengguna GitHub Anda
-const repo = 'Music'; // Ganti dengan nama repositori GitHub Anda
-const filePath = 'music'; // Ganti dengan path file yang ingin diunggah
-const token = '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'; // Ganti dengan token personal access GitHub Anda
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const file = fileInput.files[0];
+  if (file) {
+    uploadToGitHub(file);
+  } else {
+    alert('Please select a file');
+  }
+});
 
-async function uploadFileAndNotify() {
-  const fileContent = fs.readFileSync(filePath);
-  const encodedContent = Buffer.from(fileContent).toString('base64');
+function uploadToGitHub(file) {
+  // Ganti dengan kode untuk mengakses token GitHub
+  const githubToken = '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';
 
-  const url = `https://api.github.com/repos/${owner}/${repo}/contents/${filePath}`;
+  const formData = new FormData();
+  formData.append('file', file);
 
-  const response = await fetch(url, {
+  fetch('https://api.github.com/repos/Ademodsx/Music/music', {
     method: 'PUT',
     headers: {
-      'Authorization': `token ${token}`,
-      'Content-Type': 'application/json',
+      Authorization: `token ${githubToken}`
     },
     body: JSON.stringify({
-      message: 'Upload file via script',
-      content: encodedContent,
-      committer: {
-        name: 'Ademodsx',
-        email: 'ademods0@gmail.com'
-      }
+      message: 'Upload file',
+      content: btoa(unescape(encodeURIComponent(file))),
     })
+  })
+  .then(response => {
+    if (response.ok) {
+      window.location.href = 'https://music.ademods.my.id/music/' + file.name;
+    } else {
+      throw new Error('Error uploading file to GitHub');
+    }
+  })
+  .catch(error => {
+    console.error('Error:', error);
+    alert('An error occurred while uploading the file');
   });
-
-  const result = await response.json();
-  console.log(result);
-
-  if (result.content && result.content.download_url) {
-    const downloadUrl = result.content.download_url;
-    const websiteUrl = `https://music.ademods.my.id/music/${encodeURIComponent(filePath)}`;
-    console.log('File berhasil diunggah ke GitHub:', downloadUrl);
-    console.log('Lanjutkan ke website:', websiteUrl);
-    // Lakukan pengiriman ke website di sini
-  } else {
-    console.error('Gagal mengunggah file ke GitHub.');
-  }
 }
-
-uploadFileAndNotify();
