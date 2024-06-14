@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Background Video Website</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            height: 100%;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+
+        .video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        #bg-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+        }
+
+        .logo img {
+            width: 200px;
+        }
+
+        .animated-text {
+            margin-top: 20px;
+            font-size: 24px;
+            font-weight: bold;
+            opacity: 0;
+            animation: fadeIn 2s forwards, changeText 4s infinite;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes changeText {
+            0%, 100% {
+                content: '1';
+            }
+            25% {
+                content: '2';
+            }
+            50% {
+                content: '3';
+            }
+            75% {
+                content: '4';
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="video-background">
+        <video autoplay muted loop id="bg-video">
+            <source src="your-video-link.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    <div class="content">
+        <a href="your-link.html" class="logo">
+            <img src="your-logo-link.png" alt="Logo">
+        </a>
+        <div class="animated-text">
+            <span id="animated-number"></span>
+        </div>
+    </div>
+    <script>
+        const numbers = [1, 2, 3, 4];
+        let currentIndex = 0;
+
+        function updateNumber() {
+            const numberElement = document.getElementById('animated-number');
+            numberElement.innerText = numbers[currentIndex];
+            currentIndex = (currentIndex + 1) % numbers.length;
+        }
+
+        setInterval(updateNumber, 1000); // Change number every second
+    </script>
+</body>
+</html>
